@@ -21,6 +21,12 @@ export class JogadoresService {
     async consultarTodosJogadores(): Promise<Jogador[]> {
         return  await this.jogadores;
     }
+    
+    async deletarJogadores(email): Promise<void>{
+        const jogadorEncontrado = await this.jogadores.find(jogador => jogador.email === email);
+        this.jogadores = this.jogadores.filter(jogadores => jogadores.email !== jogadorEncontrado.email)
+        console.log(email);
+    }
 
     async consultarJogadoresPeloEmail(email:string): Promise<Jogador> {
         const jogadorEncontrado = await this.jogadores.find(jogador => jogador.email === email);
