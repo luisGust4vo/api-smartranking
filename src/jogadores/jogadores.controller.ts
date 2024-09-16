@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Post, Query, UsePipes, ValidationPipe } 
 import { CriarJogadorDto } from './dtios/criar-jogador.dto';
 import { JogadoresService } from './jogadores.service';
 import { Jogador } from './interfaces/jogador.interface';
+import { JogadoresValidacaoParametrosPipe } from './pipes/jogadores-validacao-parametros.pipe';
 
 @Controller('api/v1/jogadores')
 export class JogadoresController {
@@ -26,7 +27,7 @@ export class JogadoresController {
 
     @Delete()
     async deletarJogadores(
-        @Query('email') email:string): Promise<void>{
+        @Query('email',JogadoresValidacaoParametrosPipe) email:string): Promise<void>{
        this.JogadoresService.deletarJogadores(email);
     }
 
